@@ -1,0 +1,254 @@
+{'env_args': {'env': 'simple_pyramid', 'param': {'depth': 6, 'hyperplane_dim': 2, 'general_seed': -1, 'start_random': True, 'features': {'seed': -1, 'dim': 2, 'obs_var': 0.01}, 'rewards': {'depth': [6], 'coordinates': [[1, 5]], 'type': ['fix'], 'mu': [1.0], 'var': [0.0]}}}, 'train_args': {'default_learning_rate': 3e-08, 'gamma': 1.0, 'forward_steps': 2, 'entropy_regularization': 0.001, 'update_episodes': 300, 'batch_size': 256, 'minimum_episodes': 10000, 'maximum_episodes': 20000, 'epochs': 30, 'eval_rate': 0.1, 'policy_target': 'TD-Q', 'value_target': 'TD-Q', 'eval': {'opponent': ['random']}, 'seed': 0, 'agent': {'type': 'SRS_v2_v3', 'use_RND': False}, 'metadata': {'name': ['knn', 'global_aleph', 'regional_weight', 'global_return_size', 'global_eta'], 'eval_base': 'QL', 'knn': {'size': 10000, 'k': 64}, 'regional_weight': 1.0, 'global_aleph': 1.0, 'global_return_method': 'Mean', 'global_return_size': 100, 'global_eta': 0.5}}, 'worker_args': {'server_address': '0.0.0.0', 'num_parallel': 128}}
+waiting training
+started batcher 0
+started server
+started gather 0
+opened worker 0
+50 100 150 200 250 300 350 400 450 500 550 600 650 700 750 800 850 900 950 1000 1050 1100 1150 1200 1250 1300 1350 1400 1450 1500 1550 1600 1650 1700 1750 1800 1850 1900 1950 2000 2050 2100 2150 2200 2250 2300 2350 2400 2450 2500 2550 2600 2650 2700 2750 2800 2850 2900 2950 3000 3050 3100 3150 3200 3250 3300 3350 3400 3450 3500 3550 3600 3650 3700 3750 3800 3850 3900 3950 4000 4050 4100 4150 4200 4250 4300 4350 4400 4450 4500 4550 4600 4650 4700 4750 4800 4850 4900 4950 5000 5050 5100 5150 5200 5250 5300 5350 5400 5450 5500 5550 5600 5650 5700 5750 5800 5850 5900 5950 6000 6050 6100 6150 6200 6250 6300 6350 6400 6450 6500 6550 6600 6650 6700 6750 6800 6850 6900 6950 7000 7050 7100 7150 7200 7250 7300 7350 7400 7450 7500 7550 7600 7650 7700 7750 7800 7850 7900 7950 8000 8050 8100 8150 8200 8250 8300 8350 8400 8450 8500 8550 8600 8650 8700 8750 8800 8850 8900 8950 9000 9050 9100 9150 9200 9250 9300 9350 9400 9450 9500 9550 9600 9650 9700 9750 9800 9850 9900 9950 10000 start sender
+start receiver
+started training
+10050 10100 10150 10200 10250 10300 
+
+epoch 0
+win rate = 0.500 (2189.0 / 4378)
+average reward = 0.000 (2189.0 / 4378)
+generation stats = 0.000 +- 0.397
+loss = p:0.128 v:0.151 q:0.134 entropy_srs:0.084 ent_c_reg:0.094 ent:1.380 total:0.591
+updated model(87)
+10350 10400 10450 10500 10550 10600 
+
+epoch 1
+win rate = 0.538 (68.4 / 127)
+average reward = 0.077 (68.4 / 127)
+generation stats = 0.143 +- 0.357
+loss = p:0.093 v:0.135 q:0.043 entropy_srs:0.027 ent_c_reg:0.170 ent:1.328 total:0.467
+updated model(174)
+10650 10700 10750 10800 10850 10900 
+
+epoch 2
+win rate = 0.666 (84.6 / 127)
+average reward = 0.332 (84.6 / 127)
+generation stats = 0.239 +- 0.295
+loss = p:0.148 v:0.062 q:0.116 entropy_srs:0.114 ent_c_reg:0.045 ent:1.283 total:0.486
+updated model(261)
+10950 11000 11050 11100 11150 11200 
+
+epoch 3
+win rate = 0.662 (84.1 / 127)
+average reward = 0.325 (84.1 / 127)
+generation stats = 0.319 +- 0.288
+loss = p:0.126 v:0.082 q:0.127 entropy_srs:0.028 ent_c_reg:0.007 ent:1.244 total:0.369
+updated model(348)
+11250 11300 11350 11400 11450 11500 
+
+epoch 4
+win rate = 0.737 (93.5 / 127)
+average reward = 0.473 (93.5 / 127)
+generation stats = 0.427 +- 0.252
+loss = p:0.072 v:0.025 q:0.064 entropy_srs:0.083 ent_c_reg:0.044 ent:1.209 total:0.287
+updated model(435)
+11550 11600 11650 11700 11750 11800 
+
+epoch 5
+win rate = 0.752 (96.3 / 128)
+average reward = 0.504 (96.3 / 128)
+generation stats = 0.460 +- 0.223
+loss = p:0.067 v:0.014 q:0.079 entropy_srs:0.019 ent_c_reg:0.051 ent:1.179 total:0.229
+updated model(522)
+11850 11900 11950 12000 12050 12100 
+
+epoch 6
+win rate = 0.764 (97.1 / 127)
+average reward = 0.529 (97.1 / 127)
+generation stats = 0.534 +- 0.162
+loss = p:0.083 v:0.050 q:0.032 entropy_srs:0.056 ent_c_reg:0.031 ent:1.152 total:0.252
+updated model(609)
+12150 12200 12250 12300 12350 12400 
+
+epoch 7
+win rate = 0.842 (106.9 / 127)
+average reward = 0.684 (106.9 / 127)
+generation stats = 0.513 +- 0.204
+loss = p:0.038 v:0.005 q:0.078 entropy_srs:0.027 ent_c_reg:0.021 ent:1.129 total:0.169
+updated model(696)
+12450 12500 12550 12600 12650 12700 
+
+epoch 8
+win rate = 0.818 (104.7 / 128)
+average reward = 0.635 (104.7 / 128)
+generation stats = 0.563 +- 0.166
+loss = p:0.011 v:0.066 q:0.013 entropy_srs:0.066 ent_c_reg:0.059 ent:1.108 total:0.215
+updated model(783)
+12750 12800 12850 12900 12950 13000 
+
+epoch 9
+win rate = 0.874 (111.9 / 128)
+average reward = 0.749 (111.9 / 128)
+generation stats = 0.703 +- 0.133
+loss = p:0.043 v:0.057 q:0.010 entropy_srs:0.011 ent_c_reg:0.053 ent:1.091 total:0.174
+updated model(870)
+13050 13100 13150 13200 13250 13300 
+
+epoch 10
+win rate = 0.830 (106.2 / 128)
+average reward = 0.660 (106.2 / 128)
+generation stats = 0.778 +- 0.122
+loss = p:0.010 v:0.031 q:0.012 entropy_srs:0.036 ent_c_reg:0.029 ent:1.075 total:0.118
+updated model(957)
+13350 13400 13450 13500 13550 13600 
+
+epoch 11
+win rate = 0.863 (109.5 / 127)
+average reward = 0.725 (109.5 / 127)
+generation stats = 0.658 +- 0.108
+loss = p:0.015 v:0.023 q:0.026 entropy_srs:0.032 ent_c_reg:0.012 ent:1.062 total:0.107
+updated model(1044)
+13650 13700 13750 13800 13850 13900 
+
+epoch 12
+win rate = 0.876 (111.2 / 127)
+average reward = 0.752 (111.2 / 127)
+generation stats = 0.698 +- 0.133
+loss = p:0.035 v:0.038 q:0.002 entropy_srs:0.033 ent_c_reg:0.006 ent:1.050 total:0.115
+updated model(1131)
+13950 14000 14050 14100 14150 14200 
+
+epoch 13
+win rate = 0.907 (115.2 / 127)
+average reward = 0.814 (115.2 / 127)
+generation stats = 0.696 +- 0.097
+loss = p:0.008 v:0.034 q:0.030 entropy_srs:0.028 ent_c_reg:0.021 ent:1.039 total:0.121
+updated model(1218)
+14250 14300 14350 14400 14450 14500 
+
+epoch 14
+win rate = 0.938 (120.0 / 128)
+average reward = 0.875 (120.0 / 128)
+generation stats = 0.819 +- 0.080
+loss = p:0.019 v:0.028 q:0.006 entropy_srs:0.010 ent_c_reg:0.002 ent:1.030 total:0.065
+updated model(1305)
+14550 14600 14650 14700 14750 14800 
+
+epoch 15
+win rate = 0.918 (117.5 / 128)
+average reward = 0.837 (117.5 / 128)
+generation stats = 0.813 +- 0.072
+loss = p:0.016 v:0.003 q:0.011 entropy_srs:0.008 ent_c_reg:0.003 ent:1.022 total:0.041
+updated model(1392)
+14850 14900 14950 15000 15050 15100 
+
+epoch 16
+win rate = 0.949 (121.4 / 128)
+average reward = 0.897 (121.4 / 128)
+generation stats = 0.919 +- 0.027
+loss = p:0.002 v:0.003 q:0.017 entropy_srs:0.002 ent_c_reg:0.007 ent:1.015 total:0.032
+updated model(1479)
+15150 15200 15250 15300 15350 15400 
+
+epoch 17
+win rate = 0.975 (123.9 / 127)
+average reward = 0.951 (123.9 / 127)
+generation stats = 0.886 +- 0.019
+loss = p:0.020 v:0.016 q:0.012 entropy_srs:0.015 ent_c_reg:0.020 ent:1.009 total:0.083
+updated model(1566)
+15450 15500 15550 15600 15650 15700 
+
+epoch 18
+win rate = 0.991 (126.9 / 128)
+average reward = 0.983 (126.9 / 128)
+generation stats = 0.833 +- 0.039
+loss = p:0.013 v:0.001 q:0.011 entropy_srs:0.004 ent_c_reg:0.005 ent:1.004 total:0.035
+updated model(1653)
+15750 15800 15850 15900 15950 16000 
+
+epoch 19
+win rate = 0.937 (119.9 / 128)
+average reward = 0.874 (119.9 / 128)
+generation stats = 0.903 +- 0.030
+loss = p:0.009 v:0.015 q:0.012 entropy_srs:0.010 ent_c_reg:0.012 ent:0.999 total:0.057
+updated model(1740)
+16050 16100 16150 16200 16250 16300 
+
+epoch 20
+win rate = 0.962 (122.2 / 127)
+average reward = 0.924 (122.2 / 127)
+generation stats = 0.908 +- 0.058
+loss = p:0.004 v:0.005 q:0.002 entropy_srs:0.006 ent_c_reg:0.007 ent:0.995 total:0.024
+updated model(1827)
+16350 16400 16450 16500 16550 16600 
+
+epoch 21
+win rate = 0.996 (126.5 / 127)
+average reward = 0.992 (126.5 / 127)
+generation stats = 0.822 +- 0.056
+loss = p:0.010 v:0.005 q:0.011 entropy_srs:0.007 ent_c_reg:0.009 ent:0.991 total:0.042
+updated model(1914)
+16650 16700 16750 16800 16850 16900 
+
+epoch 22
+win rate = 0.910 (115.6 / 127)
+average reward = 0.820 (115.6 / 127)
+generation stats = 0.857 +- 0.048
+loss = p:0.004 v:0.004 q:0.002 entropy_srs:0.002 ent_c_reg:0.010 ent:0.988 total:0.023
+updated model(2001)
+16950 17000 17050 17100 17150 17200 
+
+epoch 23
+win rate = 0.973 (124.6 / 128)
+average reward = 0.946 (124.6 / 128)
+generation stats = 0.949 +- 0.038
+loss = p:0.005 v:0.004 q:0.002 entropy_srs:0.008 ent_c_reg:0.005 ent:0.985 total:0.023
+updated model(2088)
+17250 17300 17350 17400 17450 17500 
+
+epoch 24
+win rate = 0.987 (126.3 / 128)
+average reward = 0.973 (126.3 / 128)
+generation stats = 0.921 +- 0.045
+loss = p:0.007 v:0.001 q:0.002 entropy_srs:0.006 ent_c_reg:0.004 ent:0.983 total:0.021
+updated model(2175)
+17550 17600 17650 17700 17750 17800 
+
+epoch 25
+win rate = 0.929 (118.0 / 127)
+average reward = 0.858 (118.0 / 127)
+generation stats = 0.947 +- 0.000
+loss = p:0.004 v:0.005 q:0.001 entropy_srs:0.004 ent_c_reg:0.004 ent:0.981 total:0.017
+updated model(2262)
+17850 17900 17950 18000 18050 18100 
+
+epoch 26
+win rate = 0.994 (127.2 / 128)
+average reward = 0.988 (127.2 / 128)
+generation stats = 0.928 +- 0.000
+loss = p:0.005 v:0.004 q:0.002 entropy_srs:0.003 ent_c_reg:0.001 ent:0.979 total:0.014
+updated model(2349)
+18150 18200 18250 18300 18350 18400 
+
+epoch 27
+win rate = 1.000 (128.0 / 128)
+average reward = 1.000 (128.0 / 128)
+generation stats = 0.870 +- 0.064
+loss = p:0.002 v:0.004 q:0.003 entropy_srs:0.004 ent_c_reg:0.001 ent:0.977 total:0.014
+updated model(2436)
+18450 18500 18550 18600 18650 18700 
+
+epoch 28
+win rate = 1.000 (127.0 / 127)
+average reward = 1.000 (127.0 / 127)
+generation stats = 0.874 +- 0.027
+loss = p:0.001 v:0.001 q:0.005 entropy_srs:0.002 ent_c_reg:0.001 ent:0.976 total:0.009
+updated model(2523)
+18750 18800 18850 18900 18950 19000 
+
+epoch 29
+win rate = 1.000 (128.0 / 128)
+average reward = 1.000 (128.0 / 128)
+generation stats = 0.937 +- 0.037
+loss = p:0.001 v:0.003 q:0.002 entropy_srs:0.001 ent_c_reg:0.003 ent:0.975 total:0.010
+updated model(2610)
+closed worker 0
+disconnected
+disconnected
+finished server
+time : 2036.410687
