@@ -15,17 +15,16 @@ uv run pytest -q                            # テスト (test_scan.py のみ)
 uv run pytest -q test_scan.py::test_run_count_equals_number_of_train_logs   # 単体
 ```
 
-`pyproject.toml` で `testpaths = ["test_scan.py"]` にしてあり、`archive_v1/tests/` は意図的に収集しない。lint/formatter の設定は無い。
+ユーザーは普段 `アプリを起動.command` を Finder でダブルクリックして起動する (port 8501, `--server.address localhost`。起動済みならブラウザで開くだけ)。動作確認で別に起動するときは 8502 など別ポートを使い、終わったら止める。lint/formatter の設定は無い。
 
 ## 構成
 
-トップレベルの 3 ファイルだけが現行コード。
-
 - `scan.py` — Streamlit 非依存の走査ロジック。`scan(root)` が `(list[Batch], root直下の画像)` を返す。`Batch` → `Condition` の 2 階層。
-- `app.py` — `scan()` を `st.cache_data` 越しに呼んで表示するだけ。ロジックは `scan.py` 側に置く。
+- `app.py` — 画面。上から「バッチ一覧 (1 行 = 1 バッチの `st.dataframe`、`on_select="rerun"` で 1 行選択)」→「選んだバッチの図と条件ごとの表 (`show_batch`、未選択なら最新)」→「trainlog 直下の図」。一覧の行は `batches` と同じ順で作るので、選択行の番号がそのまま `batches` の添字になる。
 - `test_scan.py` — `tmp_path` に小さな trainlog を作って `scan.py` を検証。
+- `アプリを起動.command` — 上記のダブルクリック起動用スクリプト。
 
-`archive_v1/` は以前の多機能版 (`rl_tracker/` パッケージ: loaders/parsers/aggregate/charts、学習曲線・集計) の凍結コピー。現行コードからは参照しない。学習曲線や条件横断集計が必要になったときの参考用。
+以前の多機能版 (`archive_v1/rl_tracker/`: loaders/parsers/aggregate/charts、学習曲線・集計) は削除済み。最初のコミット `dd3ead9` に残っているので、必要なら `git show dd3ead9:archive_v1/<path>` で参照する。
 
 ## 走査ロジックの要点 (scan.py)
 
