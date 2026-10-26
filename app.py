@@ -84,8 +84,8 @@ def show_runs(batch: Batch) -> None:
 
 
 def show_batch(batch: Batch, n_cols: int) -> None:
-    when = batch.started_at.strftime(DATE_FORMAT) if batch.started_at else ""
-    st.header(f"{batch.name}  ·  {when}")
+    when = batch.started_at.strftime(DATE_FORMAT) if batch.started_at else batch.name
+    st.header(when)
     runs = " / ".join(f"{c.n_runs}回" for c in batch.conditions)
     st.caption(f"{len(batch.conditions)} 条件 · 実行回数 {runs} · {batch.path}")
     if batch.images:
