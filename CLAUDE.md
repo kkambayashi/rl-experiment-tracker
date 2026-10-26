@@ -15,12 +15,12 @@ uv run pytest -q                            # テスト (test_scan.py のみ)
 uv run pytest -q test_scan.py::test_run_count_equals_number_of_train_logs   # 単体
 ```
 
-ユーザーは普段 `アプリを起動.command` を Finder でダブルクリックして起動する (port 8501, `--server.address localhost`。起動済みならブラウザで開くだけ)。動作確認で別に起動するときは 8502 など別ポートを使い、終わったら止める。lint/formatter の設定は無い。
+ユーザーは普段 `アプリを起動.command` を Finder でダブルクリックして起動する (port 8501, `--server.address localhost`。起動済みならブラウザで開くだけ)。8502 はユーザーの別の Streamlit アプリが使っていることがある。動作確認で起動するときは、`lsof -nP -iTCP:<port> -sTCP:LISTEN` で空きを確かめたポート (例: 8519) を使い、終わったら自分が起動した PID だけを `kill` する (`pkill -f "server.port ..."` のようにまとめて止めない)。lint/formatter の設定は無い。
 
 ## 構成
 
 - `scan.py` — Streamlit 非依存の走査ロジック。`scan(root)` が `(list[Batch], root直下の画像)` を返す。`Batch` → `Condition` の 2 階層。
-- `app.py` — 画面。上から「バッチ一覧 (1 行 = 1 バッチの `st.dataframe`、`on_select="rerun"` で 1 行選択)」→「選んだバッチの図と条件ごとの表 (`show_batch`、未選択なら最新)」→「trainlog 直下の図」。一覧の行は `batches` と同じ順で作るので、選択行の番号がそのまま `batches` の添字になる。
+- `app.py` — 画面。上から「バッチ一覧 (1 行 = 1 バッチの `st.dataframe`、`on_select="rerun"`, `selection_mode="multi-row"`)」→「選んだバッチの図と条件ごとの表 (`show_batch`、未選択なら最新)」→「trainlog 直下の図」。一覧の行は `batches` と同じ順で作るので、選択行の番号がそのまま `batches` の添字になる。1 つだけなら全幅 (図はサイドバーの列数で並べる)、複数なら `st.container(horizontal=True, wrap=False)` の中に固定幅の `st.container(width=...)` を並べて横スクロールさせる (幅はサイドバーの列数 = 1 画面に並べる数で決める)。実データはどのバッチも図が 1 枚なので、列数は実質「図の大きさ」として効く。日時の表示形式は `DATE_FORMAT`。
 - `test_scan.py` — `tmp_path` に小さな trainlog を作って `scan.py` を検証。
 - `アプリを起動.command` — 上記のダブルクリック起動用スクリプト。
 
