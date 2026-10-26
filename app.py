@@ -81,13 +81,13 @@ def show_runs(batch: Batch) -> None:
         st.warning(f"{incomplete} 本のログは途中で終わっています (末尾に time: が無い)。平均に含めるか注意してください。")
 
 
-def show_batch(batch: Batch) -> None:
+def show_batch(batch: Batch, n_cols: int) -> None:
     when = batch.started_at.strftime("%Y-%m-%d %H:%M") if batch.started_at else ""
     st.header(f"{batch.name}  ·  {when}")
     runs = " / ".join(f"{c.n_runs}回" for c in batch.conditions)
     st.caption(f"{len(batch.conditions)} 条件 · 実行回数 {runs} · {batch.path}")
     if batch.images:
-        show_images(batch.images, columns)
+        show_images(batch.images, n_cols)
     else:
         st.caption("図はありません")
     show_runs(batch)
@@ -108,17 +108,23 @@ st.header("バッチ一覧")
 event = st.dataframe(summary,
                     hide_index=True,
                     on_select="rerun",
-                    selection_mode="single-row",
+                    selection_mode="multi-row",
                     column_config={"条件数": st.column_config.NumberColumn(alignment="left")},
                     )
 
 
 selected = event.selection.rows
 if selected:
-    batch = batches[selected[0]]   # 選ばれた行と同じ番号のバッチ
+    chosen = [batches[i] for i in sorted(selected)]   # 選んだ番号のバッチを全部
 else:
-    batch = batches[0]             # 何も選んでいなければ最新
-show_batch(batch)
+    chosen = [batches[0]]                             # 何も選んでいなければ最新だけ
+
+n_cols = 1 if len(chosen) > 1 else columns   # ① 2 つ以上なら 1 列、1 つならサイドバーの設定
+
+cols = st.columns(len(chosen))
+for col, batch in zip(cols, chosen):
+    with col:
+        show_batch(batch, n_cols)             # ② 2 つ目として渡す
 
 if root_images:
     st.header("trainlog 直下の図")
