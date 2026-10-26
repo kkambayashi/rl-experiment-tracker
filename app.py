@@ -20,6 +20,8 @@ DEFAULT_ROOT = Path.home() / "Desktop" / "SRS_v2_backup" / "trainlog"   # 実デ
 if not DEFAULT_ROOT.exists():
     DEFAULT_ROOT = APP_DIR / "sample_data" / "trainlog"                 # 無ければサンプル
 
+DATE_FORMAT = "%Y/%m/%d %H:%M"      # 画面に出す日時の形
+
 st.set_page_config(page_title="RL Experiment Tracker", layout="wide")
 
 
@@ -82,7 +84,7 @@ def show_runs(batch: Batch) -> None:
 
 
 def show_batch(batch: Batch, n_cols: int) -> None:
-    when = batch.started_at.strftime("%Y-%m-%d %H:%M") if batch.started_at else ""
+    when = batch.started_at.strftime(DATE_FORMAT) if batch.started_at else ""
     st.header(f"{batch.name}  ·  {when}")
     runs = " / ".join(f"{c.n_runs}回" for c in batch.conditions)
     st.caption(f"{len(batch.conditions)} 条件 · 実行回数 {runs} · {batch.path}")
@@ -96,7 +98,7 @@ def show_batch(batch: Batch, n_cols: int) -> None:
 summary = []
 for b in batches:
     summary.append({
-        "日時": b.started_at.strftime("%Y-%m-%d %H:%M") if b.started_at else "",
+        "日時": b.started_at.strftime(DATE_FORMAT) if b.started_at else "",
         "バッチ": b.name,
         "アルゴリズム": " / ".join(sorted({c.algorithm for c in b.conditions})),
         "比べている設定": ", ".join(short(k) for k in differing_keys(b.conditions) if k != "train_args.agent.type"),
@@ -119,12 +121,15 @@ if selected:
 else:
     chosen = [batches[0]]                             # 何も選んでいなければ最新だけ
 
-n_cols = 1 if len(chosen) > 1 else columns   # ① 2 つ以上なら 1 列、1 つならサイドバーの設定
 
-cols = st.columns(len(chosen))
-for col, batch in zip(cols, chosen):
-    with col:
-        show_batch(batch, n_cols)             # ② 2 つ目として渡す
+if len(chosen) == 1:
+    show_batch(chosen[0], columns)                    # 1 つだけなら今までどおり画面いっぱいに
+else:
+    width = {1: 1000, 2: 600, 3: 400}[columns]       # 列数 = 1 画面に並べるバッチの数
+    with st.container(horizontal=True, wrap=False):   # 横 1 列に並べ、はみ出したら横スクロール
+        for batch in chosen:
+            with st.container(width=width):           # 1 バッチ分の幅
+                show_batch(batch, 1)                  # どのバッチも図は 1 枚なので 1 列
 
 if root_images:
     st.header("trainlog 直下の図")
