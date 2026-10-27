@@ -85,7 +85,7 @@ def show_runs(batch: Batch) -> None:
 
 def show_batch(batch: Batch, n_cols: int) -> None:
     when = batch.started_at.strftime(DATE_FORMAT) if batch.started_at else batch.name
-    st.header(when)
+    st.subheader(when)
     runs = " / ".join(f"{c.n_runs}回" for c in batch.conditions)
     st.caption(f"{len(batch.conditions)} 条件 · 実行回数 {runs} · {batch.path}")
     if batch.images:
@@ -106,32 +106,36 @@ for b in batches:
         "平均回数": " / ".join(str(n) for n in sorted({c.n_runs for c in b.conditions})),
     })
 
-st.header("バッチ一覧")
-event = st.dataframe(summary,
-                    hide_index=True,
-                    on_select="rerun",
-                    selection_mode="multi-row",
-                    column_config={"条件数": st.column_config.NumberColumn(alignment="left")},
-                    )
+
+with st.expander("バッチ一覧", expanded=True):
+    st.caption("行を選ぶと、そのバッチの図が下に出ます (複数選ぶと横に並びます)")
+    event = st.dataframe(summary,
+                        hide_index=True,
+                        on_select="rerun",
+                        selection_mode="multi-row",
+                        column_config={"条件数": st.column_config.NumberColumn(alignment="left")},
+                        )
 
 
 selected = event.selection.rows
 if selected:
     chosen = [batches[i] for i in sorted(selected)]   # 選んだ番号のバッチを全部
 else:
-    chosen = [batches[0]]                             # 何も選んでいなければ最新だけ
+    chosen = []                             # 何も選んでいなければ表示しない
 
 
 if len(chosen) == 1:
     show_batch(chosen[0], columns)                    # 1 つだけなら今までどおり画面いっぱいに
-else:
+elif len(chosen) > 1:
     width = {1: 1100, 2: 520, 3: 350}[columns]       # 列数 = 1 画面に並べるバッチの数
     with st.container(horizontal=True, wrap=False):   # 横 1 列に並べ、はみ出したら横スクロール
         for batch in chosen:
             with st.container(width=width):           # 1 バッチ分の幅
                 show_batch(batch, 1)                  # どのバッチも図は 1 枚なので 1 列
+else:
+    st.info("バッチを選んでください")
 
 if root_images:
-    st.header("trainlog 直下の図")
+    st.subheader("trainlog 直下の図")
     show_images(root_images, columns)
     st.divider()

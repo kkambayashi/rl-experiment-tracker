@@ -20,7 +20,7 @@ uv run pytest -q test_scan.py::test_run_count_equals_number_of_train_logs   # �
 ## 構成
 
 - `scan.py` — Streamlit 非依存の走査ロジック。`scan(root)` が `(list[Batch], root直下の画像)` を返す。`Batch` → `Condition` の 2 階層。
-- `app.py` — 画面。上から「バッチ一覧 (1 行 = 1 バッチの `st.dataframe`、`on_select="rerun"`, `selection_mode="multi-row"`)」→「選んだバッチの図と条件ごとの表 (`show_batch`、未選択なら最新)」→「trainlog 直下の図」。一覧の行は `batches` と同じ順で作るので、選択行の番号がそのまま `batches` の添字になる。1 つだけなら全幅 (図はサイドバーの列数で並べる)、複数なら `st.container(horizontal=True, wrap=False)` の中に固定幅の `st.container(width=...)` を並べて横スクロールさせる (幅はサイドバーの列数 = 1 画面に並べる数で決める)。実データはどのバッチも図が 1 枚なので、列数は実質「図の大きさ」として効く。日時の表示形式は `DATE_FORMAT`。
+- `app.py` — 画面。上から「バッチ一覧 (`st.expander` の中に操作説明の caption と、1 行 = 1 バッチの `st.dataframe`、`on_select="rerun"`, `selection_mode="multi-row"`)」→「選んだバッチの図と条件ごとの表 (`show_batch`、未選択なら図は出さず `st.info` で選ぶよう案内)」→「trainlog 直下の図」。見出しは `st.subheader` にそろえている。一覧の行は `batches` と同じ順で作るので、選択行の番号がそのまま `batches` の添字になる。1 つだけなら全幅 (図はサイドバーの列数で並べる)、複数なら `st.container(horizontal=True, wrap=False)` の中に固定幅の `st.container(width=...)` を並べて横スクロールさせる (幅はサイドバーの列数 = 1 画面に並べる数で決める)。実データはどのバッチも図が 1 枚なので、列数は実質「図の大きさ」として効く。日時の表示形式は `DATE_FORMAT`。
 - `test_scan.py` — `tmp_path` に小さな trainlog を作って `scan.py` を検証。
 - `アプリを起動.command` — 上記のダブルクリック起動用スクリプト。
 
