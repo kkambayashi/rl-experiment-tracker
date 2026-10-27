@@ -15,7 +15,7 @@ uv run pytest -q                            # テスト (test_scan.py のみ)
 uv run pytest -q test_scan.py::test_run_count_equals_number_of_train_logs   # 単体
 ```
 
-ユーザーは普段 `アプリを起動.command` を Finder でダブルクリックして起動する (port 8501, `--server.address localhost`。起動済みならブラウザで開くだけ)。8502 はユーザーの別の Streamlit アプリが使っていることがある。動作確認で起動するときは、`lsof -nP -iTCP:<port> -sTCP:LISTEN` で空きを確かめたポート (例: 8519) を使い、終わったら自分が起動した PID だけを `kill` する (`pkill -f "server.port ..."` のようにまとめて止めない)。lint/formatter の設定は無い。
+ユーザーは普段、リポジトリ外の `~/Desktop/app起動フォルダ/RL Experiment Tracker.app` (スクリプトエディタで作った AppleScript。git 管理外) で起動する。ターミナルを出さずに `nohup` で 8501 を裏で起動し、ログは `~/Library/Logs/rl-experiment-tracker.log`。止めるのは同じフォルダの `RL Experiment Tracker を止める.app`。リポジトリ内の `アプリを起動.command` (他の人向け) も同じ 8501 を使い、どちらも起動済みならブラウザで開くだけ。8501 はターミナルが無くても動いていることがあるので止めない。8502 はユーザーの別の Streamlit アプリが使っていることがある。動作確認で起動するときは、`lsof -nP -iTCP:<port> -sTCP:LISTEN` で空きを確かめたポート (例: 8519) を使い、終わったら自分が起動した PID だけを `kill` する (`pkill -f "server.port ..."` のようにまとめて止めない)。lint/formatter の設定は無い。
 
 ## 構成
 

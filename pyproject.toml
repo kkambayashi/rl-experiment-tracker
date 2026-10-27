@@ -4,7 +4,7 @@ version = "0.2.0"
 description = "SRS_v2 (HandyRL) の trainlog から、保存した図と実行回数をまとめて確認する最小の Streamlit アプリ"
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = ["streamlit>=1.30"]
+dependencies = ["streamlit>=1.65"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]
