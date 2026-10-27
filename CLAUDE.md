@@ -20,9 +20,10 @@ uv run pytest -q test_scan.py::test_run_count_equals_number_of_train_logs   # �
 ## 構成
 
 - `scan.py` — Streamlit 非依存の走査ロジック。`scan(root)` が `(list[Batch], root直下の画像)` を返す。`Batch` → `Condition` の 2 階層。
-- `app.py` — 画面。上から「バッチ一覧 (`st.expander` の中に操作説明の caption と、1 行 = 1 バッチの `st.dataframe`、`on_select="rerun"`, `selection_mode="multi-row"`)」→「選んだバッチの図と条件ごとの表 (`show_batch`、未選択なら図は出さず `st.info` で選ぶよう案内)」→「trainlog 直下の図」。見出しは `st.subheader` にそろえている。一覧の行は `batches` と同じ順で作るので、選択行の番号がそのまま `batches` の添字になる。1 つだけなら全幅 (図はサイドバーの列数で並べる)、複数なら `st.container(horizontal=True, wrap=False)` の中に固定幅の `st.container(width=...)` を並べて横スクロールさせる (幅はサイドバーの列数 = 1 画面に並べる数で決める)。実データはどのバッチも図が 1 枚なので、列数は実質「図の大きさ」として効く。日時の表示形式は `DATE_FORMAT`。
+- `app.py` — 画面。上から「バッチ一覧 (`st.expander` の中に操作説明の caption と、1 行 = 1 バッチの `st.dataframe`、`on_select="rerun"`, `selection_mode="multi-row"`)」→「選んだバッチの図と条件ごとの表 (`show_batch`、未選択なら図は出さず `st.info` で選ぶよう案内)」→「trainlog 直下の図」。見出しは `st.subheader` にそろえ、バッチのフォルダのパスは見出しの `help=` (？マーク) に入れている。各バッチは `st.container(border=True)` の枠で囲む (区切り線は使わない)。一覧の行は `batches` と同じ順で作るので、選択行の番号がそのまま `batches` の添字になる。1 つだけなら全幅 (図はサイドバーの列数で並べる)、複数なら `st.container(horizontal=True, wrap=False)` の中に固定幅の `st.container(width=...)` を並べて横スクロールさせる (幅はサイドバーの列数 = 1 画面に並べる数で決める)。実データはどのバッチも図が 1 枚なので、列数は実質「図の大きさ」として効く。日時の表示形式は `DATE_FORMAT`。
 - `test_scan.py` — `tmp_path` に小さな trainlog を作って `scan.py` を検証。
 - `アプリを起動.command` — 上記のダブルクリック起動用スクリプト。
+- `.streamlit/config.toml` — 見た目のテーマ (アクセント色 `#2E6F73`、Hiragino Sans、角の丸み小、Deploy ボタン非表示)。変更はアプリの再起動で反映される。
 
 以前の多機能版 (`archive_v1/rl_tracker/`: loaders/parsers/aggregate/charts、学習曲線・集計) は削除済み。最初のコミット `dd3ead9` に残っているので、必要なら `git show dd3ead9:archive_v1/<path>` で参照する。
 

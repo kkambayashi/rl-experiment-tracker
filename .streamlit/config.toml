@@ -1,0 +1,21 @@
+[client]
+toolbarMode = "minimal"            # 右上の Deploy ボタンなどを消す
+
+[theme]
+base = "light"
+primaryColor = "#2E6F73"           # アクセント色 (チェック・ラジオなど)。赤 → 落ち着いた青緑
+backgroundColor = "#FFFFFF"        # 本文の背景。図の白い背景と同じにして、図が浮かないように
+secondaryBackgroundColor = "#F4F3EF"
+textColor = "#22262A"
+borderColor = "#E2E0D8"            # 枠線を少し温かい灰色に
+font = "Hiragino Sans, sans-serif" # Mac の日本語フォント。英数字と日本語の形がそろう
+baseRadius = "small"               # 角の丸みを控えめに
+headingFontWeights = 600
+headingFontSizes = ["1.75rem", "1.5rem", "1.15rem"]   # h1, h2, h3 の大きさ
+showSidebarBorder = true
+dataframeHeaderBackgroundColor = "#F4F3EF"
+blueColor = "#2E6F73"              # 「バッチを選んでください」の箱もアクセント色に合わせる
+
+[theme.sidebar]
+backgroundColor = "#F3F2ED"
+headingFontSizes = ["1.15rem", "1.1rem", "1.05rem"]   # サイドバーのタイトルが 2 行にならないように

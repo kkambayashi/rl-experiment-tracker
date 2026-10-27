@@ -22,7 +22,7 @@ if not DEFAULT_ROOT.exists():
 
 DATE_FORMAT = "%Y/%m/%d %H:%M"      # 画面に出す日時の形
 
-st.set_page_config(page_title="RL Experiment Tracker", layout="wide")
+st.set_page_config(page_title="RL Experiment Tracker", page_icon=":material/stacked_line_chart:",layout="wide", initial_sidebar_state=200)
 
 
 @st.cache_data(show_spinner="trainlog を読み込み中...")
@@ -85,15 +85,14 @@ def show_runs(batch: Batch) -> None:
 
 def show_batch(batch: Batch, n_cols: int) -> None:
     when = batch.started_at.strftime(DATE_FORMAT) if batch.started_at else batch.name
-    st.subheader(when)
+    st.subheader(when, help=str(batch.path))
     runs = " / ".join(f"{c.n_runs}回" for c in batch.conditions)
-    st.caption(f"{len(batch.conditions)} 条件 · 実行回数 {runs} · {batch.path}")
+    st.caption(f"{len(batch.conditions)} 条件 · 実行回数 {runs}")
     if batch.images:
         show_images(batch.images, n_cols)
     else:
         st.caption("図はありません")
     show_runs(batch)
-    st.divider()
 
 summary = []
 for b in batches:
@@ -125,17 +124,18 @@ else:
 
 
 if len(chosen) == 1:
-    show_batch(chosen[0], columns)                    # 1 つだけなら今までどおり画面いっぱいに
+    with st.container(border=True):
+        show_batch(chosen[0], columns)                    # 1 つだけなら今までどおり画面いっぱいに
 elif len(chosen) > 1:
-    width = {1: 1100, 2: 520, 3: 350}[columns]       # 列数 = 1 画面に並べるバッチの数
+    width = {1: 1100, 2: 532, 3: 349}[columns]       # 列数 = 1 画面に並べるバッチの数
     with st.container(horizontal=True, wrap=False):   # 横 1 列に並べ、はみ出したら横スクロール
         for batch in chosen:
-            with st.container(width=width):           # 1 バッチ分の幅
+            with st.container(width=width, border=True):           # 1 バッチ分の幅
                 show_batch(batch, 1)                  # どのバッチも図は 1 枚なので 1 列
 else:
     st.info("バッチを選んでください")
 
 if root_images:
-    st.subheader("trainlog 直下の図")
+    st.subheader("trainlog 直下の図", help="trainlog フォルダの直下にある png は、バッチとは関係なくまとめて表示されます")
     show_images(root_images, columns)
     st.divider()
