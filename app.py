@@ -125,7 +125,7 @@ else:
 if len(chosen) == 1:
     show_batch(chosen[0], columns)                    # 1 つだけなら今までどおり画面いっぱいに
 else:
-    width = {1: 1000, 2: 600, 3: 400}[columns]       # 列数 = 1 画面に並べるバッチの数
+    width = {1: 1100, 2: 520, 3: 350}[columns]       # 列数 = 1 画面に並べるバッチの数
     with st.container(horizontal=True, wrap=False):   # 横 1 列に並べ、はみ出したら横スクロール
         for batch in chosen:
             with st.container(width=width):           # 1 バッチ分の幅
